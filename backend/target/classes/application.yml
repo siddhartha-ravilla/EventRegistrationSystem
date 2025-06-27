@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: event-registration-backend
+  
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# AWS Configuration
+aws:
+  region: us-east-1
+  dynamodb:
+    table-name: event-registration
+    stream-enabled: true
+  sqs:
+    queue-url: ${SQS_QUEUE_URL:}
+  sns:
+    topic-arn: ${SNS_TOPIC_ARN:}
+  ses:
+    from-email: ${SES_FROM_EMAIL:noreply@eventregistration.com}
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:your-secret-key-here-make-it-long-and-secure}
+  expiration: 86400000 # 24 hours in milliseconds
+
+# QR Code Configuration
+qr:
+  width: 300
+  height: 300
+  format: PNG
+
+# Logging
+logging:
+  level:
+    com.eventregistration: DEBUG
+    org.springframework.security: DEBUG
+    software.amazon.awssdk: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# CORS Configuration
+cors:
+  allowed-origins: "http://localhost:3000,https://your-frontend-domain.com"
+  allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+  allowed-headers: "*"
+  allow-credentials: true 
