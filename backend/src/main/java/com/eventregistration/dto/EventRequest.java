@@ -1,6 +1,6 @@
 package com.eventregistration.dto;
 
-import com.eventregistration.model.Event;
+// import com.eventregistration.model.Event;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
